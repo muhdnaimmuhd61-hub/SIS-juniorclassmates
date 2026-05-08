@@ -1,1 +1,137 @@
+<!DOCTYPE html><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sa'adah International School - Junior School Classmates</title>  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+    body{background:linear-gradient(to right,green,white);min-height:100vh;}
 
+    header{
+      background:darkgreen;color:white;padding:20px;text-align:center;
+    }
+
+    .dashboard{
+      width:90%;margin:20px auto;background:white;padding:20px;border-radius:12px;
+    }
+
+    .student-card{
+      background:#f4f4f4;padding:15px;border-radius:10px;margin:10px 0;
+    }
+
+    input,textarea{
+      width:100%;padding:10px;margin:6px 0;
+    }
+
+    button{
+      padding:10px 15px;border:none;border-radius:8px;cursor:pointer;
+    }
+
+    .green{background:green;color:white;}
+    .red{background:red;color:white;}
+    .blue{background:blue;color:white;}
+  </style></head><body><header>
+  <h1>Sa'adah International School</h1>
+  <p>Junior Class Portal (Firebase Upgrade)</p>
+</header><div class="dashboard">  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button class="green" onclick="signup()">Sign Up</button>
+  <button class="blue" onclick="login()">Login</button>
+  <button class="red" onclick="logout()">Logout</button>  <hr>  <div id="app" style="display:none;"><h2>Add Student</h2>
+<input id="fullname" placeholder="Full Name">
+<input id="address" placeholder="Address">
+<input id="phone" placeholder="Phone">
+<input id="localgov" placeholder="Local Government">
+<textarea id="bio" placeholder="Biography"></textarea>
+<input type="file" id="photo">
+
+<button class="green" onclick="addStudent()">Save Student</button>
+
+<h2>Students</h2>
+<div id="list"></div>
+
+  </div>
+</div><!-- FIREBASE SDK --><script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+// 🔴 YOUR FIREBASE CONFIG (replace with your own)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// AUTH
+window.signup = async () => {
+  await createUserWithEmailAndPassword(auth, email.value, password.value);
+  alert("Account created");
+};
+
+window.login = async () => {
+  await signInWithEmailAndPassword(auth, email.value, password.value);
+  document.getElementById("app").style.display = "block";
+  loadStudents();
+};
+
+window.logout = async () => {
+  await signOut(auth);
+  document.getElementById("app").style.display = "none";
+};
+
+// ADD STUDENT
+window.addStudent = async () => {
+  const file = photo.files[0];
+  const storageRef = ref(storage, file.name);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+
+  await addDoc(collection(db,"students"),{
+    fullname: fullname.value,
+    address: address.value,
+    phone: phone.value,
+    localgov: localgov.value,
+    bio: bio.value,
+    photo: url
+  });
+
+  loadStudents();
+};
+
+// LOAD + DELETE
+window.loadStudents = async () => {
+  list.innerHTML = "";
+  const snap = await getDocs(collection(db,"students"));
+
+  snap.forEach((d) => {
+    const s = d.data();
+
+    list.innerHTML += `
+      <div class='student-card'>
+        <img src='${s.photo}' width='80'>
+        <h3>${s.fullname}</h3>
+        <p>${s.phone}</p>
+        <button class='red' onclick="deleteStudent('${d.id}')">Delete</button>
+      </div>
+    `;
+  });
+};
+
+window.deleteStudent = async (id) => {
+  await deleteDoc(doc(db,"students",id));
+  loadStudents();
+};
+
+</script></body>
+</html>

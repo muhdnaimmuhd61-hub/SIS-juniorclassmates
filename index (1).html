@@ -628,7 +628,31 @@ function previewRegPhoto(e){
   reader.readAsDataURL(file);
 }
 
-function register(){
+async function register(){
+
+  const first = document.getElementById('regFirst').value.trim();
+  const last = document.getElementById('regLast').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPassword').value;
+
+  try {
+
+    const userCredential =
+      await createUserWithEmailAndPassword(auth, email, pass);
+
+    await addDoc(collection(db, "members"), {
+      uid: userCredential.user.uid,
+      firstName: first,
+      lastName: last,
+      email: email
+    });
+
+    alert("Registration successful!");
+
+  } catch(error){
+    alert(error.message);
+  }
+}
   const first=document.getElementById('regFirst').value.trim();
   const last=document.getElementById('regLast').value.trim();
   const email=document.getElementById('regEmail').value.trim().toLowerCase();

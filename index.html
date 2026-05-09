@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sa'adah International School – Alumni Connect</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   ROOT & THEME
+═══════════════════════════════════════════════ */
+:root{
+  --gold:#c9a84c;--gold-light:#f0d080;--gold-dark:#9a7230;
+  --bg:#f5f2ec;--surface:#ffffff;--surface2:#f0ece3;
+  --text:#1a1510;--text2:#5a5040;--text3:#8a7a60;
+  --border:#ddd5c0;--shadow:rgba(0,0,0,.08);
+  --green:#2e7d52;--red:#b94040;--blue:#2a5f9e;
+  --radius:14px;--radius-sm:8px;
+  --font-head:'Playfair Display',serif;--font-body:'DM Sans',sans-serif;
+  --transition:.25s ease;
+}
+[data-theme="dark"]{
+  --bg:#0f0d09;--surface:#1a1710;--surface2:#252018;
+  --text:#f0e8d0;--text2:#b0a080;--text3:#706050;
+  --border:#352e20;--shadow:rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;transition:background var(--transition),color var(--transition)}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ═══════════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════════ */
+.hidden{display:none!important}
+.flex{display:flex}.flex-col{flex-direction:column}
+.items-center{align-items:center}.justify-between{justify-content:space-between}
+.gap-1{gap:.5rem}.gap-2{gap:1rem}.gap-3{gap:1.5rem}.gap-4{gap:2rem}
+.grid{display:grid}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:var(--radius-sm);border:none;cursor:pointer;font-family:var(--font-body);font-size:.9rem;font-weight:500;transition:all var(--transition)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff}
+.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--gold);color:var(--gold)}
+.btn-outline:hover{background:var(--gold);color:#fff}
+.btn-ghost{background:transparent;color:var(--text2)}
+.btn-ghost:hover{color:var(--gold)}
+.btn-red{background:var(--red);color:#fff}
+.card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 4px 20px var(--shadow)}
+input,textarea,select{width:100%;padding:.7rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:var(--font-body);font-size:.9rem;transition:border-color var(--transition)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;font-weight:500;color:var(--text2)}
+.form-group{margin-bottom:1.1rem}
+.tag{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.75rem;font-weight:600;background:var(--gold);color:#fff}
+.avatar{width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
+.section-title{font-family:var(--font-head);font-size:1.8rem;color:var(--text);margin-bottom:.3rem}
+.section-sub{color:var(--text3);margin-bottom:2rem;font-size:.95rem}
+.toast-wrap{position:fixed;top:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:.6rem}
+.toast{padding:.8rem 1.3rem;border-radius:var(--radius-sm);color:#fff;font-size:.88rem;font-weight:500;box-shadow:0 4px 16px var(--shadow);animation:slideIn .3s ease;max-width:300px}
+.toast.success{background:#2e7d52}.toast.error{background:var(--red)}.toast.info{background:var(--blue)}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .5s ease forwards}
+
+/* ═══════════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════════ */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;box-shadow:0 2px 12px var(--shadow)}
+.logo-wrap{display:flex;align-items:center;gap:.7rem}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;font-family:var(--font-head)}
+.logo-text{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.2}
+.logo-text span{display:block;font-size:.72rem;font-weight:400;color:var(--text3);font-family:var(--font-body)}
+.topbar-right{display:flex;align-items:center;gap:.8rem}
+#darkToggle{background:none;border:1.5px solid var(--border);border-radius:20px;padding:.35rem .9rem;cursor:pointer;font-size:1rem;color:var(--text);transition:all var(--transition)}
+#darkToggle:hover{border-color:var(--gold)}
+#userBadge{display:flex;align-items:center;gap:.6rem;cursor:pointer}
+#userBadge img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+#userBadge .uname{font-size:.85rem;font-weight:600;color:var(--text)}
+#hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+#hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition)}
+
+/* ═══════════════════════════════════════════════
+   SIDEBAR NAV
+═══════════════════════════════════════════════ */
+#sidebar{position:fixed;top:64px;left:0;bottom:0;width:230px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:1.2rem .8rem;z-index:90;transition:transform var(--transition)}
+.nav-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border-radius:var(--radius-sm);cursor:pointer;color:var(--text2);font-size:.9rem;font-weight:500;transition:all var(--transition);margin-bottom:.2rem}
+.nav-item:hover{background:var(--surface2);color:var(--gold)}
+.nav-item.active{background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));color:var(--gold);border-left:3px solid var(--gold)}
+.nav-icon{font-size:1.1rem;width:22px;text-align:center}
+.nav-section{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);padding:.8rem .9rem .3rem;margin-top:.4rem}
+
+/* ═══════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════ */
+#mainContent{margin-left:230px;margin-top:64px;padding:2.5rem 2rem;min-height:calc(100vh - 64px);transition:margin var(--transition)}
+
+/* ═══════════════════════════════════════════════
+   AUTH SCREENS
+═══════════════════════════════════════════════ */
+#authScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:1.5rem}
+.auth-container{width:100%;max-width:900px;display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px var(--shadow)}
+.auth-left{background:linear-gradient(160deg,#1a1208,#3a2a08);padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.auth-left::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,76,.15)}
+.auth-left::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(201,168,76,.08)}
+.auth-badge{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.8rem;color:#fff;font-weight:900;margin-bottom:1.5rem;box-shadow:0 8px 24px rgba(201,168,76,.4)}
+.auth-left h1{font-family:var(--font-head);font-size:1.9rem;color:#f0e0a0;line-height:1.3;margin-bottom:.8rem}
+.auth-left p{color:#a09060;font-size:.88rem;line-height:1.7}
+.auth-divider{width:50px;height:2px;background:var(--gold);margin:1.2rem 0}
+.auth-quote{font-style:italic;color:#806840;font-size:.82rem;margin-top:auto;padding-top:2rem;border-top:1px solid rgba(201,168,76,.2)}
+.auth-right{background:var(--surface);padding:2.5rem}
+.auth-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:1.8rem}
+.auth-tab{flex:1;padding:.7rem;text-align:center;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--text3);border-bottom:2.5px solid transparent;transition:all var(--transition);margin-bottom:-1.5px}
+.auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.auth-form{display:none}.auth-form.active{display:block}
+.auth-right h2{font-family:var(--font-head);font-size:1.4rem;margin-bottom:.3rem}
+.auth-right p{color:var(--text3);font-size:.85rem;margin-bottom:1.5rem}
+.photo-upload-area{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:1.2rem;text-align:center;cursor:pointer;transition:border-color var(--transition);position:relative}
+.photo-upload-area:hover{border-color:var(--gold)}
+.photo-upload-area img{width:70px;height:70px;border-radius:50%;object-fit:cover;margin-bottom:.5rem}
+.photo-upload-area p{font-size:.8rem;color:var(--text3)}
+.photo-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════ */
+.dash-hero{background:linear-gradient(135deg,#1a1208 0%,#2e2008 50%,#1a1208 100%);border-radius:var(--radius);padding:2.5rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.dash-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.1)}
+.dash-hero::after{content:'✦';position:absolute;bottom:1.5rem;right:2rem;font-size:5rem;color:rgba(201,168,76,.06);line-height:1}
+.dash-hero h1{font-family:var(--font-head);color:#f0e0a0;font-size:1.9rem;margin-bottom:.5rem;position:relative}
+.dash-hero p{color:#a09060;font-size:.95rem;max-width:500px;position:relative}
+.dash-hero .welcome-name{color:var(--gold)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin-bottom:2rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;overflow:hidden;transition:transform var(--transition),box-shadow var(--transition)}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px var(--shadow)}
+.stat-card .s-icon{font-size:1.5rem;margin-bottom:.6rem}
+.stat-card .s-num{font-family:var(--font-head);font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-card .s-label{font-size:.8rem;color:var(--text3);margin-top:.2rem}
+.stat-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(201,168,76,.06)}
+
+/* ═══════════════════════════════════════════════
+   MEMBERS GRID
+═══════════════════════════════════════════════ */
+.members-controls{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.search-bar{flex:1;min-width:200px;position:relative}
+.search-bar input{padding-left:2.5rem}
+.search-bar::before{content:'🔍';position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-size:.85rem;z-index:1}
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.4rem}
+.member-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform var(--transition),box-shadow var(--transition);cursor:pointer}
+.member-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--shadow)}
+.member-card-top{background:linear-gradient(135deg,#1a1208,#2e2008);padding:1.2rem;display:flex;align-items:center;gap:1rem}
+.member-card-top img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
+.member-card-top .initials{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.4rem;color:#fff;font-weight:700;border:3px solid rgba(255,255,255,.2);flex-shrink:0}
+.member-info h3{font-family:var(--font-head);font-size:1.05rem;color:#f0e0a0}
+.member-info p{font-size:.78rem;color:#a09060;margin-top:.2rem}
+.member-card-body{padding:1rem}
+.member-detail{display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.5rem;font-size:.82rem;color:var(--text2)}
+.member-detail .icon{font-size:.9rem;flex-shrink:0;margin-top:1px}
+.member-card-footer{padding:.8rem 1rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.like-btn{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text3);cursor:pointer;border:none;background:none;padding:.3rem .6rem;border-radius:20px;transition:all var(--transition)}
+.like-btn:hover,.like-btn.liked{color:var(--red)}
+.like-btn.liked .heart{filter:none}
+
+/* ═══════════════════════════════════════════════
+   PROFILE MODAL
+═══════════════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.modal{background:var(--surface);border-radius:var(--radius);max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-header{background:linear-gradient(135deg,#1a1208,#2e2008);padding:2rem;border-radius:var(--radius) var(--radius) 0 0;display:flex;align-items:center;gap:1.5rem}
+.modal-avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:4px solid var(--gold)}
+.modal-avatar-init{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2rem;color:#fff;font-weight:700;border:4px solid rgba(255,255,255,.2);flex-shrink:0}
+.modal-title h2{font-family:var(--font-head);font-size:1.4rem;color:#f0e0a0}
+.modal-title p{font-size:.85rem;color:#a09060;margin-top:.3rem}
+.modal-body{padding:1.8rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.1);border:none;color:#f0e0a0;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.2)}
+.info-row{display:flex;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-row .label{font-size:.8rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;min-width:110px;flex-shrink:0}
+.info-row .value{font-size:.9rem;color:var(--text)}
+.bio-text{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:.88rem;color:var(--text2);line-height:1.7;font-style:italic}
+.wa-link{display:inline-flex;align-items:center;gap:.4rem;color:#25d366;font-weight:600;text-decoration:none;font-size:.88rem}
+.wa-link:hover{text-decoration:underline}
+
+/* ═══════════════════════════════════════════════
+   EVENTS
+═══════════════════════════════════════════════ */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem}
+.event-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform var(--transition)}
+.event-card:hover{transform:translateY(-3px)}
+.event-banner{height:120px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.event-body{padding:1.3rem}
+.event-body h3{font-family:var(--font-head);font-size:1.1rem;margin-bottom:.5rem}
+.event-body .event-meta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem}
+.event-meta span{display:flex;align-items:center;gap:.3rem;font-size:.8rem;color:var(--text3)}
+.event-add-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;margin-bottom:2rem}
+
+/* ═══════════════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════════════ */
+.gallery-grid{columns:3;column-gap:1rem}
+.gallery-item{break-inside:avoid;margin-bottom:1rem;border-radius:var(--radius-sm);overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;display:block;transition:transform var(--transition)}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-item .overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity var(--transition);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem}
+.gallery-item:hover .overlay{opacity:1}
+.gallery-upload{border:2px dashed var(--border);border-radius:var(--radius);padding:2rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:border-color var(--transition);position:relative}
+.gallery-upload:hover{border-color:var(--gold)}
+.gallery-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* ═══════════════════════════════════════════════
+   MY PROFILE EDIT
+═══════════════════════════════════════════════ */
+.profile-edit-card{max-width:700px}
+.profile-photo-section{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.profile-photo-section img,.profile-photo-section .big-init{width:100px;height:100px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);flex-shrink:0}
+.big-init{background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.2rem;color:#fff;font-weight:700}
+.photo-change-area{position:relative}
+.photo-change-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{margin-top:4rem;padding:2rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;line-height:1.8}
+footer strong{color:var(--gold)}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  .auth-container{grid-template-columns:1fr}.auth-left{display:none}
+}
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #mainContent{margin-left:0}
+  #hamburger{display:flex}
+  .gallery-grid{columns:2}
+  .form-row{grid-template-columns:1fr}
+  .dash-hero h1{font-size:1.4rem}
+}
+@media(max-width:480px){
+  #mainContent{padding:1.5rem 1rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{columns:1}
+  #topbar{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ═══════════════ AUTH SCREEN ═══════════════ -->
+<div id="authScreen">
+  <div class="auth-container">
+    <div class="auth-left">
+      <div class="auth-badge">S</div>
+      <h1>Sa'adah International School</h1>
+      <div class="auth-divider"></div>
+      <p>Alumni Connect Portal — reconnect with your classmates, celebrate achievements, and keep the spirit of Sa'adah alive.</p>
+      <div class="auth-quote">
+        "Education is the most powerful weapon which you can use to change the world."<br>
+        <strong style="color:var(--gold-light)">— Sa'adah International School</strong>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+        <div class="auth-tab" onclick="switchTab('register')">Register</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form active" id="loginForm">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your alumni account</p>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••"/>
+        </div>
+        <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:.5rem" onclick="login()">Login →</button>
+        <p style="margin-top:1rem;font-size:.82rem;color:var(--text3);text-align:center">Don't have an account? <span style="color:var(--gold);cursor:pointer" onclick="switchTab('register')">Register here</span></p>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form" id="registerForm">
+        <h2>Join Alumni Network</h2>
+        <p>Create your Sa'adah alumni profile</p>
+        <div class="form-group" style="text-align:center">
+          <div class="photo-upload-area" id="regPhotoArea">
+            <img id="regPhotoPreview" src="" alt="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto .5rem"/>
+            <div id="regPhotoIcon">📷</div>
+            <p>Upload your photo</p>
+            <input type="file" accept="image/*" onchange="previewRegPhoto(event)"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="regFirst" placeholder="Muhammad"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="regLast" placeholder="Naim"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="regEmail" placeholder="you@example.com"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="regPhone" placeholder="+234..."/>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" id="regWhatsapp" placeholder="+234..."/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Home Address</label>
+          <input type="text" id="regAddress" placeholder="Street, City, State"/>
+        </div>
+        <div class="form-group">
+          <label>Graduation Year</label>
+          <input type="number" id="regYear" placeholder="e.g. 2018" min="1990" max="2030"/>
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="regGender">
+            <option value="">— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Biography</label>
+          <textarea id="regBio" rows="3" placeholder="Tell your alumni community about yourself…"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Password *</label>
+            <input type="password" id="regPassword" placeholder="min 6 chars"/>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password *</label>
+            <input type="password" id="regConfirm" placeholder="repeat password"/>
+          </div>
+        </div>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="register()">Create Account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PORTAL (hidden until login) ═══════════════ -->
+<div id="portal" class="hidden">
+  <!-- TOPBAR -->
+  <div id="topbar">
+    <div class="flex items-center gap-2">
+      <div id="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></div>
+      <div class="logo-wrap">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">Sa'adah International School<span>Alumni Connect Portal</span></div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button id="darkToggle" onclick="toggleDark()">🌙</button>
+      <div id="userBadge" onclick="navigate('profile')">
+        <img id="topbarAvatar" src="" alt="" style="display:none"/>
+        <div id="topbarInit" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff"></div>
+        <span class="uname" id="topbarName"></span>
+      </div>
+      <button class="btn btn-outline" onclick="logout()" style="font-size:.8rem;padding:.45rem .9rem">Logout</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="navigate('dashboard')" data-page="dashboard"><span class="nav-icon">🏠</span>Dashboard</div>
+    <div class="nav-item" onclick="navigate('members')" data-page="members"><span class="nav-icon">👥</span>Alumni Members</div>
+    <div class="nav-section">Community</div>
+    <div class="nav-item" onclick="navigate('events')" data-page="events"><span class="nav-icon">📅</span>Events</div>
+    <div class="nav-item" onclick="navigate('gallery')" data-page="gallery"><span class="nav-icon">🖼️</span>School Gallery</div>
+    <div class="nav-section">Account</div>
+    <div class="nav-item" onclick="navigate('profile')" data-page="profile"><span class="nav-icon">✏️</span>My Profile</div>
+    <div class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span>Logout</div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="mainContent">
+
+    <!-- ── DASHBOARD ── -->
+    <section id="page-dashboard" class="fade-up">
+      <div class="dash-hero">
+        <h1>Welcome Sa'adah International School<br>Alumni Connect 🎓</h1>
+        <p style="font-size:1.05rem;font-style:italic;color:#d4b96a;margin-bottom:.5rem;position:relative">Growth together, Learn together</p>
+        <p style="position:relative">Hello, <span class="welcome-name" id="welcomeName"></span>! Stay connected with your fellow alumni, explore events, browse the gallery, and celebrate the bonds forged at Sa'adah.</p>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1rem" id="dashExtras">
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-family:var(--font-head);margin-bottom:1rem">Recent Members</h3>
+          <div id="recentMembers"></div>
+        </div>
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-family:var(--font-head);margin-bottom:1rem">Upcoming Events</h3>
+          <div id="upcomingEvents"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MEMBERS ── -->
+    <section id="page-members" class="hidden fade-up">
+      <div class="section-title">Alumni Members</div>
+      <div class="section-sub">Connect with all registered alumni of Sa'adah International School</div>
+      <div class="members-controls">
+        <div class="search-bar"><input type="text" placeholder="Search by name, year…" oninput="filterMembers(this.value)" id="memberSearch"/></div>
+        <select onchange="filterYear(this.value)" style="width:auto;min-width:150px" id="yearFilter">
+          <option value="">All Years</option>
+        </select>
+      </div>
+      <div class="members-grid" id="membersGrid"></div>
+    </section>
+
+    <!-- ── EVENTS ── -->
+    <section id="page-events" class="hidden fade-up">
+      <div class="section-title">Events</div>
+      <div class="section-sub">Alumni gatherings, reunions, and school celebrations</div>
+
+      <!-- ADD/EDIT FORM -->
+      <div class="event-add-form card" id="eventAddForm" style="display:none;padding:1.8rem;margin-bottom:2rem">
+        <h3 style="font-family:var(--font-head);margin-bottom:1.2rem" id="evFormTitle">Add New Event</h3>
+        <input type="hidden" id="evEditId"/>
+        <div class="form-row">
+          <div class="form-group"><label>Event Title *</label><input type="text" id="evTitle" placeholder="Annual Reunion 2026"/></div>
+          <div class="form-group"><label>Date *</label><input type="date" id="evDate"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Location</label><input type="text" id="evLocation" placeholder="Babura, Jigawa State"/></div>
+          <div class="form-group"><label>Category</label>
+            <select id="evCat">
+              <option>Reunion</option><option>Academic</option><option>Cultural</option><option>Sports</option><option>Charity</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="evDesc" rows="3" placeholder="Describe the event…"></textarea></div>
+        <div class="flex gap-2">
+          <button class="btn btn-gold" onclick="saveEvent()">💾 Save Event</button>
+          <button class="btn btn-ghost" onclick="cancelEventForm()">Cancel</button>
+        </div>
+      </div>
+
+      <button class="btn btn-gold" id="showEvForm" onclick="openAddEventForm()" style="margin-bottom:1.5rem">+ Add Event</button>
+      <div class="events-grid" id="eventsGrid"></div>
+    </section>
+
+    <!-- ── GALLERY ── -->
+    <section id="page-gallery" class="hidden fade-up">
+      <div class="section-title">School Gallery</div>
+      <div class="section-sub">Memories and milestones from Sa'adah International School</div>
+      <div class="gallery-upload">
+        <div style="font-size:2rem">📸</div>
+        <p style="margin-top:.5rem;color:var(--text3);font-size:.9rem">Click to upload photos to the gallery</p>
+        <input type="file" accept="image/*" multiple onchange="uploadGallery(event)"/>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ── MY PROFILE ── -->
+    <section id="page-profile" class="hidden fade-up">
+      <div class="section-title">My Profile</div>
+      <div class="section-sub">Update your alumni information</div>
+      <div class="card profile-edit-card" style="padding:2rem">
+        <div class="profile-photo-section">
+          <div id="profilePhotoWrap"></div>
+          <div>
+            <h3 id="profileDisplayName" style="font-family:var(--font-head);font-size:1.3rem"></h3>
+            <p style="color:var(--text3);font-size:.85rem" id="profileDisplayEmail"></p>
+            <div class="photo-change-area" style="margin-top:.7rem">
+              <button class="btn btn-outline" style="font-size:.82rem;pointer-events:none">📷 Change Photo</button>
+              <input type="file" accept="image/*" onchange="changeProfilePhoto(event)"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" id="pfFirst"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="pfLast"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="pfPhone"/></div>
+          <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="pfWhatsapp"/></div>
+        </div>
+        <div class="form-group"><label>Home Address</label><input type="text" id="pfAddress"/></div>
+        <div class="form-group"><label>Graduation Year</label><input type="number" id="pfYear"/></div>
+        <div class="form-group"><label>Gender</label>
+          <select id="pfGender">
+            <option value="">— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Biography</label><textarea id="pfBio" rows="4"></textarea></div>
+        <button class="btn btn-gold" onclick="saveProfile()">Save Changes</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="portalFooter">
+    <strong>Sa'adah International School</strong> &copy; 2026 — Alumni Connect Portal<br>
+    Founder: <strong>Muhd Naim Muhammad</strong> | Federal University of Technology Babura, Jigawa State<br>
+    Building lifelong connections among Sa'adah alumni worldwide.
+  </footer>
+</div>
+
+<!-- ── PROFILE MODAL ── -->
+<div class="modal-overlay hidden" id="profileModal" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-header" id="mHeader"></div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<!-- ── GALLERY LIGHTBOX ── -->
+<div class="modal-overlay hidden" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="" style="max-width:90vw;max-height:85vh;border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.5)"/>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   STORAGE HELPERS
+═══════════════════════════════════════════════ */
+const LS = {
+  get:(k)=>{ try{ return JSON.parse(localStorage.getItem(k)) }catch{ return null }},
+  set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),
+  del:(k)=>localStorage.removeItem(k)
+};
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+let currentUser = null;
+let regPhotoData = '';
+let currentMemberFilter = '';
+let currentYearFilter = '';
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+(function init(){
+  // Seed admin account if not exists
+  const users = LS.get('saadah_users') || [];
+  if(!users.find(u=>u.email==='admin@saadah.edu')){
+    users.push({
+      id:'admin001',email:'admin@saadah.edu',password:'admin123',
+      firstName:'Muhd Naim',lastName:'Muhammad',phone:'+2348000000000',
+      whatsapp:'+2348000000000',address:'Federal University of Technology Babura, Jigawa State',
+      year:'2010',bio:'Founder of Sa\'adah International School Alumni Connect. Dedicated to keeping the alumni community strong.',
+      photo:'',role:'admin',joined:new Date('2024-01-01').toISOString(),likes:[]
+    });
+    LS.set('saadah_users',users);
+  }
+  // Seed events
+  if(!LS.get('saadah_events')){
+    LS.set('saadah_events',[
+      {id:'ev1',title:'Annual Alumni Reunion 2026',date:'2026-08-15',location:'Babura, Jigawa State',category:'Reunion',desc:'Our flagship yearly gathering. Meet old friends and celebrate our school legacy.',emoji:'🎉'},
+      {id:'ev2',title:'Career Day & Mentorship Fair',date:'2026-09-10',location:'Online (Zoom)',category:'Academic',desc:'Alumni professionals share career advice and mentorship opportunities with current students.',emoji:'💼'},
+      {id:'ev3',title:'Sa\'adah Cultural Festival',date:'2026-10-20',location:'School Grounds',category:'Cultural',desc:'A celebration of Northern Nigerian culture and the school\'s multicultural heritage.',emoji:'🎭'}
+    ]);
+  }
+  // Seed gallery
+  if(!LS.get('saadah_gallery')){
+    LS.set('saadah_gallery',[]);
+  }
+  // Check session
+  const sess = LS.get('saadah_session');
+  if(sess){
+    const users2 = LS.get('saadah_users')||[];
+    const u = users2.find(x=>x.id===sess);
+    if(u){ currentUser=u; showPortal(); return; }
+  }
+  document.getElementById('authScreen').style.display='flex';
+  // Dark mode
+  if(LS.get('saadah_dark')){
+    document.documentElement.setAttribute('data-theme','dark');
+    document.getElementById('darkToggle').textContent='☀️';
+  }
+})();
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+function toast(msg,type='success'){
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;t.textContent=msg;
+  document.getElementById('toastWrap').appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+}
+
+/* ═══════════════════════════════════════════════
+   AUTH
+═══════════════════════════════════════════════ */
+function switchTab(tab){
+  document.querySelectorAll('.auth-tab').forEach((el,i)=>el.classList.toggle('active',i===(tab==='login'?0:1)));
+  document.querySelectorAll('.auth-form').forEach((el,i)=>el.classList.toggle('active',i===(tab==='login'?0:1)));
+}
+
+function previewRegPhoto(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    regPhotoData=ev.target.result;
+    const img=document.getElementById('regPhotoPreview');
+    img.src=regPhotoData;img.style.display='block';
+    document.getElementById('regPhotoIcon').style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function register(){
+  const first=document.getElementById('regFirst').value.trim();
+  const last=document.getElementById('regLast').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const phone=document.getElementById('regPhone').value.trim();
+  const whatsapp=document.getElementById('regWhatsapp').value.trim();
+  const address=document.getElementById('regAddress').value.trim();
+  const year=document.getElementById('regYear').value.trim();
+  const gender=document.getElementById('regGender').value;
+  const bio=document.getElementById('regBio').value.trim();
+  const pass=document.getElementById('regPassword').value;
+  const conf=document.getElementById('regConfirm').value;
+  if(!first||!last||!email||!pass){toast('Please fill all required fields (*).','error');return;}
+  if(pass.length<6){toast('Password must be at least 6 characters.','error');return;}
+  if(pass!==conf){toast('Passwords do not match.','error');return;}
+  const users=LS.get('saadah_users')||[];
+  if(users.find(u=>u.email===email)){toast('Email already registered.','error');return;}
+  const user={
+    id:'u'+Date.now(),email,password:pass,firstName:first,lastName:last,
+    phone,whatsapp,address,year,gender,bio,photo:regPhotoData,role:'member',
+    joined:new Date().toISOString(),likes:[]
+  };
+  users.push(user);LS.set('saadah_users',users);
+  toast('Account created! Please login.','success');
+  switchTab('login');
+  document.getElementById('loginEmail').value=email;
+}
+
+function login(){
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('loginPassword').value;
+  const users=LS.get('saadah_users')||[];
+  const user=users.find(u=>u.email===email&&u.password===pass);
+  if(!user){toast('Invalid email or password.','error');return;}
+  currentUser=user;
+  LS.set('saadah_session',user.id);
+  showPortal();
+}
+
+function logout(){
+  currentUser=null;LS.del('saadah_session');
+  document.getElementById('portal').classList.add('hidden');
+  document.getElementById('authScreen').style.display='flex';
+  toast('Logged out.','info');
+}
+
+/* ═══════════════════════════════════════════════
+   PORTAL
+═══════════════════════════════════════════════ */
+function showPortal(){
+  document.getElementById('authScreen').style.display='none';
+  document.getElementById('portal').classList.remove('hidden');
+  updateTopbar();
+  navigate('dashboard');
+}
+
+function updateTopbar(){
+  document.getElementById('topbarName').textContent=currentUser.firstName;
+  if(currentUser.photo){
+    document.getElementById('topbarAvatar').src=currentUser.photo;
+    document.getElementById('topbarAvatar').style.display='block';
+    document.getElementById('topbarInit').style.display='none';
+  } else {
+    document.getElementById('topbarInit').textContent=(currentUser.firstName[0]||'')+(currentUser.lastName[0]||'');
+    document.getElementById('topbarAvatar').style.display='none';
+    document.getElementById('topbarInit').style.display='flex';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function navigate(page){
+  document.querySelectorAll('[id^="page-"]').forEach(s=>s.classList.add('hidden'));
+  const el=document.getElementById('page-'+page);
+  if(el){el.classList.remove('hidden');el.classList.remove('fade-up');void el.offsetWidth;el.classList.add('fade-up');}
+  document.querySelectorAll('.nav-item[data-page]').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+  // Render
+  if(page==='dashboard') renderDashboard();
+  if(page==='members') renderMembers();
+  if(page==='events') renderEvents();
+  if(page==='gallery') renderGallery();
+  if(page==='profile') renderProfileEdit();
+  // Close sidebar on mobile
+  if(window.innerWidth<=768) document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════════
+   DARK MODE
+═══════════════════════════════════════════════ */
+function toggleDark(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('darkToggle').textContent=isDark?'🌙':'☀️';
+  LS.set('saadah_dark',!isDark);
+}
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════ */
+function renderDashboard(){
+  document.getElementById('welcomeName').textContent=currentUser.firstName+' '+currentUser.lastName;
+  const users=LS.get('saadah_users')||[];
+  const events=LS.get('saadah_events')||[];
+  const gallery=LS.get('saadah_gallery')||[];
+  const male=users.filter(u=>u.gender==='Male').length;
+  const female=users.filter(u=>u.gender==='Female').length;
+  const other=users.length-male-female;
+  const stats=[
+    {icon:'👥',num:users.length,label:'Total Alumni'},
+    {icon:'👨‍🎓',num:male,label:'Male Alumni'},
+    {icon:'👩‍🎓',num:female,label:'Female Alumni'},
+    {icon:'📅',num:events.length,label:'Events'},
+    {icon:'🖼️',num:gallery.length,label:'Gallery Photos'},
+    {icon:'❤️',num:users.reduce((a,u)=>(u.likes?a+u.likes.length:a),0),label:'Profile Likes'}
+  ];
+  document.getElementById('statsGrid').innerHTML=stats.map(s=>`
+    <div class="stat-card">
+      <div class="s-icon">${s.icon}</div>
+      <div class="s-num">${s.num}</div>
+      <div class="s-label">${s.label}</div>
+    </div>`).join('');
+  // Recent members
+  const recent=[...users].sort((a,b)=>new Date(b.joined)-new Date(a.joined)).slice(0,4);
+  document.getElementById('recentMembers').innerHTML=recent.map(u=>`
+    <div class="flex items-center gap-2" style="padding:.6rem 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="openProfile('${u.id}')">
+      ${u.photo?`<img src="${u.photo}" class="avatar" style="width:38px;height:38px"/>`:
+        `<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0">${(u.firstName[0]||'')+(u.lastName[0]||'')}</div>`}
+      <div>
+        <div style="font-size:.88rem;font-weight:600">${u.firstName} ${u.lastName}</div>
+        <div style="font-size:.75rem;color:var(--text3)">${u.year?'Class of '+u.year:''}</div>
+      </div>
+    </div>`).join('');
+  // Upcoming events
+  const upcoming=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,3);
+  document.getElementById('upcomingEvents').innerHTML=upcoming.map(ev=>`
+    <div style="padding:.6rem 0;border-bottom:1px solid var(--border)">
+      <div style="font-size:.88rem;font-weight:600">${ev.emoji||'📅'} ${ev.title}</div>
+      <div style="font-size:.75rem;color:var(--text3);margin-top:.2rem">${formatDate(ev.date)} · ${ev.location||''}</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   MEMBERS
+═══════════════════════════════════════════════ */
+function renderMembers(){
+  const users=LS.get('saadah_users')||[];
+  // Populate year filter
+  const years=[...new Set(users.map(u=>u.year).filter(Boolean))].sort();
+  const yf=document.getElementById('yearFilter');
+  const prevVal=yf.value;
+  yf.innerHTML='<option value="">All Years</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  yf.value=prevVal;
+  let list=users;
+  if(currentMemberFilter){list=list.filter(u=>(u.firstName+' '+u.lastName).toLowerCase().includes(currentMemberFilter.toLowerCase()));}
+  if(currentYearFilter){list=list.filter(u=>u.year===currentYearFilter);}
+  document.getElementById('membersGrid').innerHTML=list.length===0?'<p style="color:var(--text3)">No members found.</p>':list.map(u=>memberCard(u)).join('');
+}
+
+function memberCard(u){
+  const myLikes=(currentUser.likes||[]);
+  const liked=myLikes.includes(u.id);
+  const likeCount=(u.likes||[]).length;
+  return `<div class="member-card" onclick="openProfile('${u.id}')">
+    <div class="member-card-top">
+      ${u.photo?`<img src="${u.photo}" alt="${u.firstName}"/>`:
+        `<div class="initials">${(u.firstName[0]||'')+(u.lastName[0]||'')}</div>`}
+      <div class="member-info">
+        <h3>${u.firstName} ${u.lastName}</h3>
+        <p>${u.year?'Class of '+u.year:''} ${u.role==='admin'?'<span class="tag" style="margin-left:.3rem">Admin</span>':''}</p>
+      </div>
+    </div>
+    <div class="member-card-body">
+      ${u.phone?`<div class="member-detail"><span class="icon">📞</span>${u.phone}</div>`:''}
+      ${u.address?`<div class="member-detail"><span class="icon">📍</span>${u.address}</div>`:''}
+      ${u.bio?`<div class="member-detail" style="color:var(--text3);font-style:italic"><span class="icon">💬</span>${u.bio.substring(0,80)}${u.bio.length>80?'…':''}</div>`:''}
+    </div>
+    <div class="member-card-footer">
+      <button class="like-btn ${liked?'liked':''}" onclick="toggleLike(event,'${u.id}')">
+        <span class="heart">${liked?'❤️':'🤍'}</span> ${likeCount} Like${likeCount!==1?'s':''}
+      </button>
+      <span style="font-size:.75rem;color:var(--text3)">Joined ${new Date(u.joined).getFullYear()}</span>
+    </div>
+  </div>`;
+}
+
+function filterMembers(val){currentMemberFilter=val;renderMembers();}
+function filterYear(val){currentYearFilter=val;renderMembers();}
+
+function toggleLike(e,uid){
+  e.stopPropagation();
+  if(uid===currentUser.id){toast('You cannot like your own profile.','info');return;}
+  const users=LS.get('saadah_users')||[];
+  const me=users.find(u=>u.id===currentUser.id);
+  const target=users.find(u=>u.id===uid);
+  if(!me||!target)return;
+  me.likes=me.likes||[];
+  target.likes=target.likes||[];
+  if(me.likes.includes(uid)){
+    me.likes=me.likes.filter(x=>x!==uid);
+    target.likes=target.likes.filter(x=>x!==currentUser.id);
+    toast('Like removed.','info');
+  } else {
+    me.likes.push(uid);
+    target.likes.push(currentUser.id);
+    toast('Liked!','success');
+  }
+  LS.set('saadah_users',users);
+  currentUser=users.find(u=>u.id===currentUser.id);
+  renderMembers();
+}
+
+/* ═══════════════════════════════════════════════
+   PROFILE MODAL
+═══════════════════════════════════════════════ */
+function openProfile(uid){
+  const users=LS.get('saadah_users')||[];
+  const u=users.find(x=>x.id===uid);if(!u)return;
+  const liked=(currentUser.likes||[]).includes(uid);
+  const likeCount=(u.likes||[]).length;
+  document.getElementById('mHeader').innerHTML=`
+    ${u.photo?`<img src="${u.photo}" class="modal-avatar" alt="${u.firstName}"/>`:
+      `<div class="modal-avatar-init">${(u.firstName[0]||'')+(u.lastName[0]||'')}</div>`}
+    <div class="modal-title">
+      <h2>${u.firstName} ${u.lastName} ${u.role==='admin'?'<span class="tag">Founder</span>':''}</h2>
+      <p>${u.year?'Class of '+u.year:''} · Alumni Member</p>
+      <div style="margin-top:.6rem;display:flex;gap:.6rem;align-items:center">
+        <button class="like-btn ${liked?'liked':''}" onclick="toggleLike(event,'${u.id}')" style="background:rgba(255,255,255,.1);color:${liked?'#ff6b6b':'#f0e0a0'}">
+          ${liked?'❤️':'🤍'} ${likeCount} Like${likeCount!==1?'s':''}
+        </button>
+      </div>
+    </div>`;
+  document.getElementById('mBody').innerHTML=`
+    ${u.bio?`<div class="bio-text" style="margin-bottom:1.5rem">"${u.bio}"</div>`:''}
+    <div class="info-row"><div class="label">Full Name</div><div class="value">${u.firstName} ${u.lastName}</div></div>
+    <div class="info-row"><div class="label">Email</div><div class="value">${u.email}</div></div>
+    ${u.phone?`<div class="info-row"><div class="label">Phone</div><div class="value">${u.phone}</div></div>`:''}
+    ${u.whatsapp?`<div class="info-row"><div class="label">WhatsApp</div><div class="value"><a class="wa-link" href="https://wa.me/${u.whatsapp.replace(/\D/g,'')}" target="_blank">💬 ${u.whatsapp}</a></div></div>`:''}
+    ${u.address?`<div class="info-row"><div class="label">Address</div><div class="value">${u.address}</div></div>`:''}
+    ${u.year?`<div class="info-row"><div class="label">Grad. Year</div><div class="value">${u.year}</div></div>`:''}
+    <div class="info-row"><div class="label">Member Since</div><div class="value">${formatDate(u.joined)}</div></div>`;
+  document.getElementById('profileModal').classList.remove('hidden');
+}
+
+function closeModal(e){
+  if(e.target===document.getElementById('profileModal')) document.getElementById('profileModal').classList.add('hidden');
+}
+function closeModalDirect(){document.getElementById('profileModal').classList.add('hidden');}
+
+/* ═══════════════════════════════════════════════
+   EVENTS
+═══════════════════════════════════════════════ */
+const evColors=['linear-gradient(135deg,#1a1208,#2e2008)','linear-gradient(135deg,#0a1e0a,#1e3a1e)','linear-gradient(135deg,#0a1020,#1e2a40)','linear-gradient(135deg,#200a0a,#3a1e1e)'];
+const evEmojis={Reunion:'🎉',Academic:'💼',Cultural:'🎭',Sports:'⚽',Charity:'❤️'};
+
+function renderEvents(){
+  const events=LS.get('saadah_events')||[];
+  document.getElementById('eventsGrid').innerHTML=events.length===0?'<p style="color:var(--text3)">No events yet. Add the first one!</p>':events.map((ev,i)=>`
+    <div class="event-card">
+      <div class="event-banner" style="background:${evColors[i%evColors.length]}">
+        <span style="font-size:3rem">${ev.emoji||'📅'}</span>
+      </div>
+      <div class="event-body">
+        <span class="tag">${ev.category||'Event'}</span>
+        <h3 style="margin-top:.6rem">${ev.title}</h3>
+        <p style="font-size:.85rem;color:var(--text2);margin-top:.4rem">${ev.desc||''}</p>
+        <div class="event-meta">
+          <span>📅 ${formatDate(ev.date)}</span>
+          ${ev.location?`<span>📍 ${ev.location}</span>`:''}
+        </div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem">
+          <button class="btn btn-outline" style="font-size:.8rem;padding:.4rem .9rem" onclick="openEditEventForm('${ev.id}')">✏️ Edit</button>
+          <button class="btn btn-red" style="font-size:.8rem;padding:.4rem .9rem" onclick="deleteEvent('${ev.id}')">🗑️ Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openAddEventForm(){
+  document.getElementById('evFormTitle').textContent='Add New Event';
+  document.getElementById('evEditId').value='';
+  document.getElementById('evTitle').value='';
+  document.getElementById('evDate').value='';
+  document.getElementById('evLocation').value='';
+  document.getElementById('evCat').value='Reunion';
+  document.getElementById('evDesc').value='';
+  const f=document.getElementById('eventAddForm');
+  f.style.display='block';
+  f.scrollIntoView({behavior:'smooth'});
+}
+
+function openEditEventForm(id){
+  const events=LS.get('saadah_events')||[];
+  const ev=events.find(e=>e.id===id);if(!ev)return;
+  document.getElementById('evFormTitle').textContent='Edit Event';
+  document.getElementById('evEditId').value=ev.id;
+  document.getElementById('evTitle').value=ev.title||'';
+  document.getElementById('evDate').value=ev.date||'';
+  document.getElementById('evLocation').value=ev.location||'';
+  document.getElementById('evCat').value=ev.category||'Reunion';
+  document.getElementById('evDesc').value=ev.desc||'';
+  const f=document.getElementById('eventAddForm');
+  f.style.display='block';
+  f.scrollIntoView({behavior:'smooth'});
+}
+
+function cancelEventForm(){
+  document.getElementById('eventAddForm').style.display='none';
+}
+
+function saveEvent(){
+  const title=document.getElementById('evTitle').value.trim();
+  const date=document.getElementById('evDate').value;
+  const location=document.getElementById('evLocation').value.trim();
+  const cat=document.getElementById('evCat').value;
+  const desc=document.getElementById('evDesc').value.trim();
+  const editId=document.getElementById('evEditId').value;
+  if(!title||!date){toast('Title and date are required.','error');return;}
+  const events=LS.get('saadah_events')||[];
+  if(editId){
+    const idx=events.findIndex(e=>e.id===editId);
+    if(idx>=0){
+      events[idx]={...events[idx],title,date,location,category:cat,desc,emoji:evEmojis[cat]||'📅'};
+      toast('Event updated!','success');
+    }
+  } else {
+    events.push({id:'ev'+Date.now(),title,date,location,category:cat,desc,emoji:evEmojis[cat]||'📅',addedBy:currentUser.id});
+    toast('Event added!','success');
+  }
+  LS.set('saadah_events',events);
+  document.getElementById('eventAddForm').style.display='none';
+  renderEvents();
+}
+
+function deleteEvent(id){
+  if(!confirm('Delete this event? This cannot be undone.'))return;
+  const events=(LS.get('saadah_events')||[]).filter(e=>e.id!==id);
+  LS.set('saadah_events',events);
+  toast('Event deleted.','info');
+  renderEvents();
+}
+
+/* ═══════════════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════════════ */
+function renderGallery(){
+  const gallery=LS.get('saadah_gallery')||[];
+  document.getElementById('galleryGrid').innerHTML=gallery.length===0?
+    '<p style="color:var(--text3)">No photos yet. Be the first to upload!</p>':
+    gallery.map((img,i)=>`
+      <div class="gallery-item" onclick="openLightbox('${i}')">
+        <img src="${img.src}" alt="Gallery photo"/>
+        <div class="overlay">🔍</div>
+      </div>`).join('');
+}
+
+function uploadGallery(e){
+  const files=Array.from(e.target.files);
+  let done=0;
+  const gallery=LS.get('saadah_gallery')||[];
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      gallery.push({src:ev.target.result,uploader:currentUser.id,date:new Date().toISOString()});
+      done++;
+      if(done===files.length){
+        LS.set('saadah_gallery',gallery);
+        toast(`${files.length} photo${files.length>1?'s':''} uploaded!`,'success');
+        renderGallery();
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function openLightbox(idx){
+  const gallery=LS.get('saadah_gallery')||[];
+  document.getElementById('lightboxImg').src=gallery[idx].src;
+  document.getElementById('lightbox').classList.remove('hidden');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.add('hidden');}
+
+/* ═══════════════════════════════════════════════
+   MY PROFILE EDIT
+═══════════════════════════════════════════════ */
+function renderProfileEdit(){
+  document.getElementById('pfFirst').value=currentUser.firstName||'';
+  document.getElementById('pfLast').value=currentUser.lastName||'';
+  document.getElementById('pfPhone').value=currentUser.phone||'';
+  document.getElementById('pfWhatsapp').value=currentUser.whatsapp||'';
+  document.getElementById('pfAddress').value=currentUser.address||'';
+  document.getElementById('pfYear').value=currentUser.year||'';
+  document.getElementById('pfGender').value=currentUser.gender||'';
+  document.getElementById('pfBio').value=currentUser.bio||'';
+  document.getElementById('profileDisplayName').textContent=currentUser.firstName+' '+currentUser.lastName;
+  document.getElementById('profileDisplayEmail').textContent=currentUser.email;
+  const wrap=document.getElementById('profilePhotoWrap');
+  if(currentUser.photo){
+    wrap.innerHTML=`<img src="${currentUser.photo}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:4px solid var(--gold)"/>`;
+  } else {
+    wrap.innerHTML=`<div class="big-init">${(currentUser.firstName[0]||'')+(currentUser.lastName[0]||'')}</div>`;
+  }
+}
+
+function changeProfilePhoto(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    currentUser.photo=ev.target.result;
+    saveCurrentUser();
+    updateTopbar();
+    renderProfileEdit();
+    toast('Photo updated!','success');
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveProfile(){
+  currentUser.firstName=document.getElementById('pfFirst').value.trim()||currentUser.firstName;
+  currentUser.lastName=document.getElementById('pfLast').value.trim()||currentUser.lastName;
+  currentUser.phone=document.getElementById('pfPhone').value.trim();
+  currentUser.whatsapp=document.getElementById('pfWhatsapp').value.trim();
+  currentUser.address=document.getElementById('pfAddress').value.trim();
+  currentUser.year=document.getElementById('pfYear').value.trim();
+  currentUser.gender=document.getElementById('pfGender').value;
+  currentUser.bio=document.getElementById('pfBio').value.trim();
+  saveCurrentUser();
+  updateTopbar();
+  toast('Profile saved!','success');
+}
+
+function saveCurrentUser(){
+  const users=LS.get('saadah_users')||[];
+  const idx=users.findIndex(u=>u.id===currentUser.id);
+  if(idx>=0){users[idx]=currentUser;LS.set('saadah_users',users);}
+}
+
+/* ═══════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════ */
+function formatDate(d){
+  if(!d)return'';
+  try{return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
+  catch{return d;}
+}
+</script>
+</body>
+</html>

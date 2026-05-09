@@ -801,18 +801,27 @@ function renderDashboard(){
 /* ═══════════════════════════════════════════════
    MEMBERS
 ═══════════════════════════════════════════════ */
-function renderMembers(){
-  const users=LS.get('saadah_users')||[];
-  // Populate year filter
-  const years=[...new Set(users.map(u=>u.year).filter(Boolean))].sort();
-  const yf=document.getElementById('yearFilter');
-  const prevVal=yf.value;
-  yf.innerHTML='<option value="">All Years</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
-  yf.value=prevVal;
-  let list=users;
-  if(currentMemberFilter){list=list.filter(u=>(u.firstName+' '+u.lastName).toLowerCase().includes(currentMemberFilter.toLowerCase()));}
-  if(currentYearFilter){list=list.filter(u=>u.year===currentYearFilter);}
-  document.getElementById('membersGrid').innerHTML=list.length===0?'<p style="color:var(--text3)">No members found.</p>':list.map(u=>memberCard(u)).join('');
+async function renderMembers(){
+
+  const querySnapshot = await getDocs(collection(db, "members"));
+
+  let html = "";
+
+  querySnapshot.forEach((doc) => {
+
+    const u = doc.data();
+
+    html += `
+      <div class="member-card">
+        <div class="member-card-body">
+          <h3>${u.firstName} ${u.lastName}</h3>
+          <p>${u.email}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("membersGrid").innerHTML = html;
 }
 
 function memberCard(u){

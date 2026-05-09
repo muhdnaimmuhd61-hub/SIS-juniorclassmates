@@ -1111,6 +1111,47 @@ function formatDate(d){
   catch{return d;}
 }
 </script>
-   
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBR8oiu5xeuh7jaRwDH6qKbYqaWhjK_ej8",
+  authDomain: "alumni-connects-48de6.firebaseapp.com",
+  projectId: "alumni-connects-48de6",
+  storageBucket: "alumni-connects-48de6.firebasestorage.app",
+  messagingSenderId: "204758165483",
+  appId: "1:204758165483:web:3a87db32990d9848a65bae"
+measurementId: "G-TX2EWNNKDL"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.auth = auth;
+window.db = db;
+window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+window.collection = collection;
+window.addDoc = addDoc;
+window.getDocs = getDocs;
+
+  </script> 
 </body>
 </html>

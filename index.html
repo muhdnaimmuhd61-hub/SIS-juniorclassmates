@@ -524,7 +524,6 @@ footer strong{color:var(--gold)}
   <!-- FOOTER -->
   <footer id="portalFooter">
     <strong>Sa'adah International School</strong> &copy; 2026 — Alumni Connect Portal<br>
-    Founder: <strong>Muhd Naim Muhammad</strong> | Federal University of Technology Babura, Jigawa State<br>
     Building lifelong connections among Sa'adah alumni worldwide.
   </footer>
 </div>
@@ -569,18 +568,13 @@ let currentYearFilter = '';
   const users = LS.get('saadah_users') || [];
   if(!users.find(u=>u.email==='admin@saadah.edu')){
     users.push({
-      id:'admin001',email:'admin@saadah.edu',password:'admin123',
-      firstName:'Muhd Naim',lastName:'Muhammad',phone:'+2348000000000',
-      whatsapp:'+2348000000000',address:'Federal University of Technology Babura, Jigawa State',
-      year:'2010',bio:'Founder of Sa\'adah International School Alumni Connect. Dedicated to keeping the alumni community strong.',
-      photo:'',role:'admin',joined:new Date('2024-01-01').toISOString(),likes:[]
     });
     LS.set('saadah_users',users);
   }
   // Seed events
   if(!LS.get('saadah_events')){
     LS.set('saadah_events',[
-      {id:'ev1',title:'Annual Alumni Reunion 2026',date:'2026-08-15',location:'Babura, Jigawa State',category:'Reunion',desc:'Our flagship yearly gathering. Meet old friends and celebrate our school legacy.',emoji:'🎉'},
+      {id:'ev1',title:'Annual Alumni Reunion 2026',date:'2026-05-31',location:'hadejia, Jigawa State',category:'Reunion',desc:'Our flagship yearly gathering. Meet old friends and celebrate our school legacy.',emoji:'🎉'},
       {id:'ev2',title:'Career Day & Mentorship Fair',date:'2026-09-10',location:'Online (Zoom)',category:'Academic',desc:'Alumni professionals share career advice and mentorship opportunities with current students.',emoji:'💼'},
       {id:'ev3',title:'Sa\'adah Cultural Festival',date:'2026-10-20',location:'School Grounds',category:'Cultural',desc:'A celebration of Northern Nigerian culture and the school\'s multicultural heritage.',emoji:'🎭'}
     ]);
